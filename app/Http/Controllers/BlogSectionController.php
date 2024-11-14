@@ -15,7 +15,7 @@ class BlogSectionController extends Controller
     public function index()
     {
         $sections = DB::table('blog_sections')->get();
-        return view('blog_sections.index', compact('sections'));
+        return view('Blog.admin.blog_section.index', compact('sections'));
     }
     /**
      * Show the form for creating a new resource.
@@ -23,7 +23,7 @@ class BlogSectionController extends Controller
     // 2. عرض صفحة إنشاء قسم جديد
     public function create()
     {
-        return view('blog_sections.create');
+        return view('Blog.admin.blog_section.create');
     }
 
     /**
@@ -34,11 +34,12 @@ class BlogSectionController extends Controller
     public function store(Request $request)
     {
         DB::table('blog_sections')->insert([
-            'section_name' => $request->input('section_name'),
+            'name' => $request->input('name'),
             'description' => $request->input('description')
         ]);
 
-        return redirect()->route('blog_sections.index')->with('success', 'تم إضافة القسم بنجاح');
+        return redirect()->route('blog_sections.index')
+        ->with('success', 'تم إضافة القسم بنجاح');
     }
 
     /**
@@ -51,11 +52,13 @@ class BlogSectionController extends Controller
 
         // Check if the section exists
         if (!$section) {
-            return redirect()->route('blog_sections.index')->with('error', 'Blog section not found');
+            return redirect()->route('blog_sections.index')
+            ->with('error', 'Blog section not found');
         }
 
         // Retrieve all blogs associated with this section
-        $blogs = DB::table('blogs')->where('blog_section_id', $id)->get();
+        $blogs = DB::table('blogs')
+        ->where('blog_section_id', $id)->get();
 
         // Return the view for showing the specific blog section and its blogs
         return view('blog_sections.show', compact('section', 'blogs'));
@@ -68,7 +71,7 @@ class BlogSectionController extends Controller
     public function edit($id)
     {
         $section = DB::table('blog_sections')->where('id', $id)->first();
-        return view('blog_sections.edit', compact('section'));
+        return view('Blog.admin.blog_section.edit', compact('section'));
     }
 
     /**

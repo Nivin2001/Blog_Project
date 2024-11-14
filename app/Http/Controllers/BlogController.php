@@ -30,7 +30,7 @@ class BlogController extends Controller
        public function create()
        {
            $sections = DB::table('blog_sections')->get();
-           return view('blogs.create', compact('sections'));
+           return view('Blog.admin.blog.create', compact('sections'));
        }
     /**
      * Store a newly created resource in storage.

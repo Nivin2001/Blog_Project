@@ -20,13 +20,6 @@ Route::get('/login', function () {
 // Authentication Route (POST for login submission)
 Route::post('/login', [LoginController::class, 'login'])->name('login.submit');
 
-// Protected Routes (requires authentication)
-// // Route::middleware(['auth'])->group(function () {
-//     Route::get('/dashboard', function () {
-//         return view('Blog.master') // Protected dashboard route
-//     // })
-//     ->name('dashboard');
-
 Route::get('/dashboard', function () {
     return view('Blog.dashboard'); // Change this to your desired dashboard view
 })->name('dashboard');

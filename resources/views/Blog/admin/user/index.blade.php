@@ -6,10 +6,11 @@
     <table class="table mt-3">
         <thead>
             <tr>
+                <th> ID </th>
                 <th>Username</th>
                 <th>Email</th>
-                <th>First Name</th>
-                <th>Last Name</th>
+                <th>Role</th>
+                <th> Joined On </th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -20,6 +21,7 @@
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
                     <td>{{ $user->role }}</td>
+                    <td>{{ $user->created_at }}</td>
                     <td>
                         <a href="{{ route('users.show', $user->id) }}" class="btn btn-info">View</a>
                         <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning">Edit</a>
